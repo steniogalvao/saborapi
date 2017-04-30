@@ -1,0 +1,130 @@
+<Schema name="Sense">
+  <Cube name="consulta" visible="true" cache="true" enabled="true">
+    <Table name="consulta">
+    </Table>
+    <Dimension type="StandardDimension" visible="true" foreignKey="idespecialidade" highCardinality="false" name="especialidade">
+      <Hierarchy name="especialidade" visible="true" hasAll="true" primaryKey="idespecialidade">
+        <Table name="especialidade">
+        </Table>
+        <Level name="nome" visible="true" column="idespecialidade" nameColumn="nome" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="id" visible="true" table="especialidade" column="idespecialidade" nameColumn="idespecialidade" type="Numeric" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="idprofissional" highCardinality="false" name="profissional">
+      <Hierarchy name="profissional" visible="true" hasAll="true" primaryKey="idprofissional">
+        <Table name="profissional">
+        </Table>
+        <Level name="nome" visible="true" column="idprofissional" nameColumn="nome" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="id" visible="true" table="profissional" column="idprofissional" nameColumn="idprofissional" type="Integer" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="idprestador" highCardinality="false" name="prestador">
+      <Hierarchy name="prestador" visible="true" hasAll="true" primaryKey="idprestador">
+        <Table name="prestador">
+        </Table>
+        <Level name="nome" visible="true" column="idprestador" nameColumn="nome_prestador" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="id" visible="true" table="prestador" column="idprestador" nameColumn="idprestador" type="Integer" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="TimeDimension" visible="true" foreignKey="idData" highCardinality="false" name="data">
+      <Hierarchy name="tempo" visible="true" hasAll="true" primaryKey="id">
+        <Table name="data">
+        </Table>
+        <Level name="ano" visible="true" table="data" column="ano" type="Integer" uniqueMembers="true" levelType="TimeYears" hideMemberIf="Never">
+        </Level>
+        <Level name="mes" visible="true" table="data" column="mes" type="Integer" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
+        </Level>
+        <Level name="dia" visible="true" table="data" column="data" type="Date" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="consulta_valor" column="value" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="consulta_quantidade" column="amount" datatype="Integer" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="exame" visible="true" cache="true" enabled="true">
+    <Table name="exame">
+    </Table>
+    <Dimension type="StandardDimension" visible="true" foreignKey="especialidade_id" highCardinality="false" name="especialidade">
+      <Hierarchy name="especialidade" visible="true" hasAll="true">
+        <Table name="especialidade">
+        </Table>
+        <Level name="nome" visible="true" table="especialidade" column="idespecialidade" nameColumn="nome" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="id" visible="true" table="especialidade" column="idespecialidade" nameColumn="idespecialidade" type="Integer" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="profissional_id" highCardinality="false" name="profissional">
+      <Hierarchy name="profissional" visible="true" hasAll="true">
+        <Table name="profissional">
+        </Table>
+        <Level name="nome" visible="true" table="profissional" column="idprofissional" nameColumn="nome" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="id" visible="true" table="profissional" column="idprofissional" nameColumn="idprofissional" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="prestador_id" highCardinality="false" name="prestador">
+      <Hierarchy name="prestador" visible="true" hasAll="true">
+        <Table name="prestador">
+        </Table>
+        <Level name="nome" visible="true" table="prestador" column="idprestador" nameColumn="nome_prestador" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="id" visible="true" table="prestador" column="idprestador" nameColumn="idprestador" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="procedimento_id" highCardinality="false" name="procedimento">
+      <Hierarchy name="procedimento" visible="true" hasAll="true">
+        <Table name="procedimento">
+        </Table>
+        <Level name="nome" visible="true" table="procedimento" column="idtabelacbhpm" nameColumn="descricao" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="id" visible="true" table="procedimento" column="idtabelacbhpm" nameColumn="idtabelacbhpm" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="TimeDimension" visible="true" foreignKey="idData" highCardinality="false" name="data">
+      <Hierarchy name="tempo" visible="true" hasAll="true" primaryKey="id">
+        <Table name="data">
+        </Table>
+        <Level name="ano" visible="true" table="data" column="ano" type="Integer" uniqueMembers="true" levelType="TimeYears" hideMemberIf="Never">
+        </Level>
+        <Level name="mes" visible="true" table="data" column="mes" type="Integer" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
+        </Level>
+        <Level name="dia" visible="true" table="data" column="data" type="Date" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="exame_valor" column="value" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="exame_quantidade" column="amount" datatype="Integer" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <VirtualCube enabled="true" name="consulta_exame" visible="true">
+    <VirtualCubeDimension cubeName="consulta" visible="true" highCardinality="false" name="profissional">
+    </VirtualCubeDimension>
+    <VirtualCubeDimension cubeName="consulta" visible="true" highCardinality="false" name="especialidade">
+    </VirtualCubeDimension>
+    <VirtualCubeDimension cubeName="consulta" visible="true" highCardinality="false" name="prestador">
+    </VirtualCubeDimension>
+    <VirtualCubeDimension cubeName="consulta" visible="true" highCardinality="false" name="data">
+    </VirtualCubeDimension>
+    <VirtualCubeMeasure cubeName="consulta" name="[Measures].[consulta_quantidade]" visible="true">
+    </VirtualCubeMeasure>
+    <VirtualCubeMeasure cubeName="consulta" name="[Measures].[consulta_valor]" visible="true">
+    </VirtualCubeMeasure>
+    <VirtualCubeMeasure cubeName="exame" name="[Measures].[exame_quantidade]" visible="true">
+    </VirtualCubeMeasure>
+    <VirtualCubeMeasure cubeName="exame" name="[Measures].[exame_valor]" visible="true">
+    </VirtualCubeMeasure>
+  </VirtualCube>
+</Schema>

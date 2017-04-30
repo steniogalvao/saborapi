@@ -1,0 +1,34 @@
+package br.com.vsg.saborapi.controllers;
+
+import io.swagger.annotations.ApiParam;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import br.com.vsg.saborapi.api.EmployeesAPI;
+import br.com.vsg.saborapi.services.UserService;
+import br.com.vsg.saborapi.utils.ConverterUtils;
+import br.com.vsg.saborapi.utils.Utils;
+
+@javax.annotation.Generated( value = "class io.swagger.codegen.languages.SpringCodegen", date = "2017-01-10T12:57:55.879Z" )
+@Controller
+public class EmployeesApiController implements EmployeesAPI {
+
+	@Autowired
+	private UserService userService;
+	@Autowired
+	private ConverterUtils converterUtils;
+	@Autowired
+	private Utils utils;
+
+	public ResponseEntity<String> employeesGET( @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken, @ApiParam( value = "cursor de paginação" ) @RequestParam( value = "cursor", required = false ) String cursor ) {
+		try {
+			return null;
+		} catch ( Exception e ) {
+			e.printStackTrace();
+			return converterUtils.returnErroApi();
+		}
+	}
+}
