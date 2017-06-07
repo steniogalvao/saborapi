@@ -1,12 +1,19 @@
 package br.com.vsg.saborapi.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
- * User
+ * Representation of an employee
  */
 @javax.annotation.Generated( value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-10-18T18:41:55.772Z" )
+@Entity
 public class Employee {
 
-	private String id = null;
+	@Id
+	@GeneratedValue
+	private int id;
 
 	private String name = null;
 
@@ -18,11 +25,11 @@ public class Employee {
 
 	private String password = null;
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId( String id ) {
+	public void setId( int id ) {
 		this.id = id;
 	}
 
@@ -71,7 +78,7 @@ public class Employee {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ( ( cpf == null ) ? 0 : cpf.hashCode() );
-		result = prime * result + ( ( id == null ) ? 0 : id.hashCode() );
+		result = prime * result + id;
 		result = prime * result + ( ( name == null ) ? 0 : name.hashCode() );
 		result = prime * result + ( ( password == null ) ? 0 : password.hashCode() );
 		result = prime * result + ( ( phone == null ) ? 0 : phone.hashCode() );
@@ -93,10 +100,7 @@ public class Employee {
 				return false;
 		} else if ( !cpf.equals( other.cpf ) )
 			return false;
-		if ( id == null ) {
-			if ( other.id != null )
-				return false;
-		} else if ( !id.equals( other.id ) )
+		if ( id != other.id )
 			return false;
 		if ( name == null ) {
 			if ( other.name != null )

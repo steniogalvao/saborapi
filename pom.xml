@@ -3,13 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>br.com.infoway</groupId>
-	<artifactId>senseusergridapi</artifactId>
+	<groupId>br.com.vsgdev</groupId>
+	<artifactId>saborapi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>sense-usergrid-api</name>
-	<description>projetc using spring and usergrid</description>
+	<name>saborapi</name>
+	<description>api to Sabor do Sertão company </description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -22,8 +22,6 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<springfox-version>2.4.0</springfox-version>
-		<mondrian-version>3.12.0.1-196</mondrian-version>
-		<gson-version>2.6.2</gson-version>
 		<powermock.version>1.5.1</powermock.version>
 		<cglib.version>3.1</cglib.version>
 		<okhttp-version>3.2.0</okhttp-version>
@@ -40,6 +38,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<version>1.5.1.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -65,17 +67,6 @@
 			<artifactId>joda-time</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>${gson-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.usergrid</groupId>
-			<artifactId>usergrid-java-client</artifactId>
-			<version>2.2.0</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 			<version>4.5.2</version>
@@ -86,18 +77,16 @@
 			<version>3.4</version>
 		</dependency>
 
-		<!-- OLAP provider -->
-		<dependency>
-			<groupId>pentaho</groupId>
-			<artifactId>mondrian</artifactId>
-			<version>${mondrian-version}</version>
-		</dependency>
-
 		<!-- Dependencia de testes -->
 		<dependency>
 			<groupId>org.spockframework</groupId>
 			<artifactId>spock-spring</artifactId>
 			<version>1.1-groovy-2.4-rc-3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>
@@ -134,24 +123,12 @@
 			<artifactId>cglib-nodep</artifactId>
 			<version>${cglib.version}</version>
 		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>org.powermock</groupId> -->
-		<!-- <artifactId>powermock-api-mockito-common</artifactId> -->
-		<!-- <version>1.6.6</version> -->
-		<!-- </dependency> -->
-
-
-		<!-- Drive Mysql, deletar para subistituir pelo cassandra quando conter 
-			dados -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>6.0.5</version>
 		</dependency>
 
-
-
-		<!-- Dependencias do usergrid que o nexus não esta baixando -->
 		<dependency>
 			<groupId>com.intellij</groupId>
 			<artifactId>annotations</artifactId>
@@ -182,16 +159,6 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
-			<!-- <plugin> -->
-			<!-- <groupId>org.apache.tomcat.maven</groupId> -->
-			<!-- <artifactId>tomcat7-maven-plugin</artifactId> -->
-			<!-- <version>2.2</version> -->
-			<!-- <configuration> -->
-			<!-- <url>http://localhost:8080/manager</url> -->
-			<!-- <server>localhost</server> -->
-			<!-- <path>/</path> -->
-			<!-- </configuration> -->
-			<!-- </plugin> -->
 		</plugins>
 	</build>
 

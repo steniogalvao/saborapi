@@ -17,9 +17,9 @@ import br.com.vsg.saborapi.model.vo.EmployeesVO;
 @Api( value = "employees", description = "the users API" )
 public interface EmployeesAPI {
 
-	@ApiOperation( value = "Funcionários.", notes = "Recupera todos os funcionários.\\n", response = EmployeesVO.class, tags = { "Employee", } )
+	@ApiOperation( value = "Funcionários.", notes = "Recupera todos os funcionários.\\n", response = EmployeesVO.class, tags = { "Employees", } )
 	@ApiResponses( value = { @ApiResponse( code = 200, message = "Todos os usuários.", response = EmployeesVO.class ), @ApiResponse( code = 200, message = "Unexpected error", response = EmployeesVO.class ) } )
 	@RequestMapping( value = "/employees", produces = { "application/json" }, method = RequestMethod.GET )
-	ResponseEntity<String> employeesGET( @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken, @ApiParam( value = "cursor" ) @RequestParam( value = "cursor", required = false ) String cursor );
+	ResponseEntity<String> employeesGET( @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken );
 
 }

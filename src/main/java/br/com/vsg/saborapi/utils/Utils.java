@@ -2,9 +2,6 @@ package br.com.vsg.saborapi.utils;
 
 import javax.annotation.PostConstruct;
 
-import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.usergrid.java.client.model.UsergridUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,14 +21,6 @@ public class Utils {
 		factory = JsonNodeFactory.instance;
 	}
 
-	public UsergridUser instanceUsergridUser() {
-		return new UsergridUser();
-	}
-
-	public HttpClient instanceHttpClient() {
-		return HttpClientBuilder.create().build();
-	}
-
 	/**
 	 * Cria uma nova instancia de um {@link ObjectNode}
 	 * 
@@ -49,7 +38,5 @@ public class Utils {
 	public ArrayNode instanceArrayNode() {
 		return factory.arrayNode();
 	}
-
-
 
 }

@@ -3,12 +3,15 @@ package br.com.vsg.saborapi.controllers;
 import io.swagger.annotations.ApiParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 import br.com.vsg.saborapi.api.EmployeesAPI;
-import br.com.vsg.saborapi.services.UserService;
+import br.com.vsg.saborapi.services.EmployeeService;
 import br.com.vsg.saborapi.utils.ConverterUtils;
 import br.com.vsg.saborapi.utils.Utils;
 
@@ -17,15 +20,16 @@ import br.com.vsg.saborapi.utils.Utils;
 public class EmployeesApiController implements EmployeesAPI {
 
 	@Autowired
-	private UserService userService;
+	private EmployeeService employeeService;
 	@Autowired
 	private ConverterUtils converterUtils;
 	@Autowired
 	private Utils utils;
 
-	public ResponseEntity<String> employeesGET( @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken, @ApiParam( value = "cursor de paginação" ) @RequestParam( value = "cursor", required = false ) String cursor ) {
+	public ResponseEntity<String> employeesGET( @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken) {
 		try {
-			return null;
+			JsonNode json = employeeService.getAll();
+			return new ResponseEntity<String>( json.toString(), HttpStatus.OK );
 		} catch ( Exception e ) {
 			e.printStackTrace();
 			return converterUtils.returnErroApi();

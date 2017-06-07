@@ -20,22 +20,22 @@ import br.com.vsg.saborapi.model.Success;
 @Api( value = "packaging", description = "the packaging API" )
 public interface PackagingApi {
 
-	@ApiOperation( value = "Cadastra envasamento", notes = "Cadastra envasamento.\\n", response = Success.class, tags = { "Despesa", } )
+	@ApiOperation( value = "Cadastra envasamento", notes = "Cadastra envasamento.\\n", response = Success.class, tags = { "Packaging", } )
 	@ApiResponses( value = { @ApiResponse( code = 200, message = "Resultado da ação.", response = Success.class ), @ApiResponse( code = 200, message = "Unexpected error", response = Success.class ) } )
 	@RequestMapping( value = "/packaging", produces = { "application/json" }, method = RequestMethod.POST )
 	ResponseEntity<String> packagingPOST( @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken, @ApiParam( value = "Dados da envasamento.", required = true ) @RequestBody Packaging packaging );
 
-	@ApiOperation( value = "Deleta envasamento.", notes = "Deleta envasamento.\\n", response = Success.class, tags = { "Despesa", } )
+	@ApiOperation( value = "Deleta envasamento.", notes = "Deleta envasamento.\\n", response = Success.class, tags = { "Packaging", } )
 	@ApiResponses( value = { @ApiResponse( code = 200, message = "Resultado da ação.", response = Success.class ), @ApiResponse( code = 200, message = "Unexpected error", response = Success.class ) } )
 	@RequestMapping( value = "/packaging/{id}", produces = { "application/json" }, method = RequestMethod.DELETE )
 	ResponseEntity<String> packagingUuidDELETE( @ApiParam( value = "Id do funcionário.", required = true ) @PathVariable( "id" ) String id, @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken );
 
-	@ApiOperation( value = "Busca envasamento.", notes = "Recupera uma envasamento.\\n", response = Packaging.class, tags = { "Despesa", } )
+	@ApiOperation( value = "Busca envasamento.", notes = "Recupera uma envasamento.\\n", response = Packaging.class, tags = { "Packaging", } )
 	@ApiResponses( value = { @ApiResponse( code = 200, message = "Dados do funcionário.", response = Packaging.class ), @ApiResponse( code = 200, message = "Unexpected error", response = Packaging.class ) } )
 	@RequestMapping( value = "/packaging/{id}", produces = { "application/json" }, method = RequestMethod.GET )
 	ResponseEntity<String> packagingUuidGET( @ApiParam( value = "Id do funcionário.", required = true ) @PathVariable( "id" ) String id, @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken );
 
-	@ApiOperation( value = "Edita envasamento", notes = "Altera Evasamento.\\n", response = Success.class, tags = { "Despesa", } )
+	@ApiOperation( value = "Edita envasamento", notes = "Altera Evasamento.\\n", response = Success.class, tags = { "Packaging", } )
 	@ApiResponses( value = { @ApiResponse( code = 200, message = "Resultado da ação.", response = Success.class ), @ApiResponse( code = 200, message = "Unexpected error", response = Success.class ) } )
 	@RequestMapping( value = "/packaging/{id}", produces = { "application/json" }, method = RequestMethod.PUT )
 	ResponseEntity<String> packagingUuidPUT( @ApiParam( value = "Id do funcionário.", required = true ) @PathVariable( "id" ) String id, @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken, @ApiParam( value = "Dados da envasamento.", required = true ) @RequestBody Packaging packaging );

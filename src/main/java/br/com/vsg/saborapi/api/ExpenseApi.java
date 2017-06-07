@@ -20,22 +20,22 @@ import br.com.vsg.saborapi.model.Success;
 @Api( value = "expense", description = "the expense API" )
 public interface ExpenseApi {
 
-	@ApiOperation( value = "Cadastra despesa", notes = "Cadastra despesa.\\n", response = Success.class, tags = { "Despesa", } )
+	@ApiOperation( value = "Cadastra despesa", notes = "Cadastra despesa.\\n", response = Success.class, tags = { "Expense", } )
 	@ApiResponses( value = { @ApiResponse( code = 200, message = "Resultado da ação.", response = Success.class ), @ApiResponse( code = 200, message = "Unexpected error", response = Success.class ) } )
 	@RequestMapping( value = "/expense", produces = { "application/json" }, method = RequestMethod.POST )
 	ResponseEntity<String> expensePOST( @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken, @ApiParam( value = "Dados da despesa.", required = true ) @RequestBody Expense expense );
 
-	@ApiOperation( value = "Deleta despesa.", notes = "Deleta despesa.\\n", response = Success.class, tags = { "Despesa", } )
+	@ApiOperation( value = "Deleta despesa.", notes = "Deleta despesa.\\n", response = Success.class, tags = { "Expense", } )
 	@ApiResponses( value = { @ApiResponse( code = 200, message = "Resultado da ação.", response = Success.class ), @ApiResponse( code = 200, message = "Unexpected error", response = Success.class ) } )
 	@RequestMapping( value = "/expense/{id}", produces = { "application/json" }, method = RequestMethod.DELETE )
 	ResponseEntity<String> expenseUuidDELETE( @ApiParam( value = "Id do funcionário.", required = true ) @PathVariable( "id" ) String id, @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken );
 
-	@ApiOperation( value = "Busca despesa.", notes = "Recupera uma despesa.\\n", response = Expense.class, tags = { "Despesa", } )
+	@ApiOperation( value = "Busca despesa.", notes = "Recupera uma despesa.\\n", response = Expense.class, tags = { "Expense", } )
 	@ApiResponses( value = { @ApiResponse( code = 200, message = "Dados do funcionário.", response = Expense.class ), @ApiResponse( code = 200, message = "Unexpected error", response = Expense.class ) } )
 	@RequestMapping( value = "/expense/{id}", produces = { "application/json" }, method = RequestMethod.GET )
 	ResponseEntity<String> expenseUuidGET( @ApiParam( value = "Id do funcionário.", required = true ) @PathVariable( "id" ) String id, @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken );
 
-	@ApiOperation( value = "Edita despesa", notes = "Altera Despesa.\\n", response = Success.class, tags = { "Despesa", } )
+	@ApiOperation( value = "Edita despesa", notes = "Altera Expense.\\n", response = Success.class, tags = { "Expense", } )
 	@ApiResponses( value = { @ApiResponse( code = 200, message = "Resultado da ação.", response = Success.class ), @ApiResponse( code = 200, message = "Unexpected error", response = Success.class ) } )
 	@RequestMapping( value = "/expense/{id}", produces = { "application/json" }, method = RequestMethod.PUT )
 	ResponseEntity<String> expenseUuidPUT( @ApiParam( value = "Id do funcionário.", required = true ) @PathVariable( "id" ) String id, @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken, @ApiParam( value = "Dados da despesa.", required = true ) @RequestBody Expense expense );

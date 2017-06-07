@@ -101,4 +101,14 @@ public class ConverterUtils {
 		return response;
 	}
 
+	/**
+	 * Metodo para retonar um json de resposta
+	 * 
+	 * @param json
+	 * @return {@link ResponseEntity}
+	 * */
+	public ResponseEntity<String> returnJson( JsonNode json ) {
+		return new ResponseEntity<String>( json.toString(), HttpStatus.OK );
+	}
+
 }
