@@ -28,16 +28,16 @@ public interface PackagingApi {
 	@ApiOperation( value = "Deleta envasamento.", notes = "Deleta envasamento.\\n", response = Success.class, tags = { "Packaging", } )
 	@ApiResponses( value = { @ApiResponse( code = 200, message = "Resultado da ação.", response = Success.class ), @ApiResponse( code = 200, message = "Unexpected error", response = Success.class ) } )
 	@RequestMapping( value = "/packaging/{id}", produces = { "application/json" }, method = RequestMethod.DELETE )
-	ResponseEntity<String> packagingUuidDELETE( @ApiParam( value = "Id do funcionário.", required = true ) @PathVariable( "id" ) String id, @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken );
+	ResponseEntity<String> packagingUuidDELETE( @ApiParam( value = "Id do envasamento.", required = true ) @PathVariable( "id" ) int id, @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken );
 
 	@ApiOperation( value = "Busca envasamento.", notes = "Recupera uma envasamento.\\n", response = Packaging.class, tags = { "Packaging", } )
-	@ApiResponses( value = { @ApiResponse( code = 200, message = "Dados do funcionário.", response = Packaging.class ), @ApiResponse( code = 200, message = "Unexpected error", response = Packaging.class ) } )
+	@ApiResponses( value = { @ApiResponse( code = 200, message = "Dados do envasamento.", response = Packaging.class ), @ApiResponse( code = 200, message = "Unexpected error", response = Packaging.class ) } )
 	@RequestMapping( value = "/packaging/{id}", produces = { "application/json" }, method = RequestMethod.GET )
-	ResponseEntity<String> packagingUuidGET( @ApiParam( value = "Id do funcionário.", required = true ) @PathVariable( "id" ) String id, @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken );
+	ResponseEntity<String> packagingUuidGET( @ApiParam( value = "Id do envasamento.", required = true ) @PathVariable( "id" ) int id, @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken );
 
 	@ApiOperation( value = "Edita envasamento", notes = "Altera Evasamento.\\n", response = Success.class, tags = { "Packaging", } )
 	@ApiResponses( value = { @ApiResponse( code = 200, message = "Resultado da ação.", response = Success.class ), @ApiResponse( code = 200, message = "Unexpected error", response = Success.class ) } )
 	@RequestMapping( value = "/packaging/{id}", produces = { "application/json" }, method = RequestMethod.PUT )
-	ResponseEntity<String> packagingUuidPUT( @ApiParam( value = "Id do funcionário.", required = true ) @PathVariable( "id" ) String id, @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken, @ApiParam( value = "Dados da envasamento.", required = true ) @RequestBody Packaging packaging );
+	ResponseEntity<String> packagingUuidPUT( @ApiParam( value = "Id do envasamento.", required = true ) @PathVariable( "id" ) int id, @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken, @ApiParam( value = "Dados da envasamento.", required = true ) @RequestBody Packaging packaging );
 
 }

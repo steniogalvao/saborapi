@@ -15,7 +15,10 @@ public class Despolp {
 
 	private BigDecimal kgPulp = null;
 
-	private LocalDate date = null;
+	/**
+	 * {@link LocalDate}
+	 * */
+	private String date = null;
 
 	private BigDecimal fruitAmount = null;
 

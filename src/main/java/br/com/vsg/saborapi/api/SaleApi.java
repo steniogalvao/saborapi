@@ -28,16 +28,16 @@ public interface SaleApi {
 	@ApiOperation( value = "Deleta venda.", notes = "Deleta venda.\\n", response = Success.class, tags = { "Sale", } )
 	@ApiResponses( value = { @ApiResponse( code = 200, message = "Resultado da ação.", response = Success.class ), @ApiResponse( code = 200, message = "Unexpected error", response = Success.class ) } )
 	@RequestMapping( value = "/sale/{id}", produces = { "application/json" }, method = RequestMethod.DELETE )
-	ResponseEntity<String> saleUuidDELETE( @ApiParam( value = "Id da venda.", required = true ) @PathVariable( "id" ) String id, @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken );
+	ResponseEntity<String> saleUuidDELETE( @ApiParam( value = "Id da venda.", required = true ) @PathVariable( "id" ) int id, @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken );
 
 	@ApiOperation( value = "Busca venda.", notes = "Recupera uma venda.\\n", response = Sale.class, tags = { "Sale", } )
 	@ApiResponses( value = { @ApiResponse( code = 200, message = "Dados do funcionário.", response = Sale.class ), @ApiResponse( code = 200, message = "Unexpected error", response = Sale.class ) } )
 	@RequestMapping( value = "/sale/{id}", produces = { "application/json" }, method = RequestMethod.GET )
-	ResponseEntity<String> saleUuidGET( @ApiParam( value = "Id da venda.", required = true ) @PathVariable( "id" ) String id, @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken );
+	ResponseEntity<String> saleUuidGET( @ApiParam( value = "Id da venda.", required = true ) @PathVariable( "id" ) int id, @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken );
 
 	@ApiOperation( value = "Edita venda", notes = "Altera Evasamento.\\n", response = Success.class, tags = { "Sale", } )
 	@ApiResponses( value = { @ApiResponse( code = 200, message = "Resultado da ação.", response = Success.class ), @ApiResponse( code = 200, message = "Unexpected error", response = Success.class ) } )
 	@RequestMapping( value = "/sale/{id}", produces = { "application/json" }, method = RequestMethod.PUT )
-	ResponseEntity<String> saleUuidPUT( @ApiParam( value = "Id da venda.", required = true ) @PathVariable( "id" ) String id, @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken, @ApiParam( value = "Dados da venda.", required = true ) @RequestBody Sale sale );
+	ResponseEntity<String> saleUuidPUT( @ApiParam( value = "Id da venda.", required = true ) @PathVariable( "id" ) int id, @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken, @ApiParam( value = "Dados da venda.", required = true ) @RequestBody Sale sale );
 
 }
