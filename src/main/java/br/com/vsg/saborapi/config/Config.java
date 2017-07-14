@@ -7,7 +7,7 @@ import java.math.RoundingMode;
 /**
  * Classe que contém configurações da aplicação utilizadas em tempo de execução.
  * 
- * @author Anderson Farias & Stênio Galvão
+ * @author Stênio Galvão
  */
 public final class Config {
 
@@ -28,13 +28,12 @@ public final class Config {
 	public static final int SCALE_3 = 3;
 
 	/**
-	 * Forma de arredondamento utilizado nos cálculos dos valores dos
-	 * indicadores
+	 * Forma de arredondamento utilizado nos cálculos dos valores
 	 */
 	public static final RoundingMode ROUNDING = RoundingMode.HALF_DOWN;
 
 	/**
-	 * tamanho da pagina nas consultas mdx
+	 * tamanho da pagina nas consultas
 	 * */
 	public static final int PAGE_SIZE = 20;
 }

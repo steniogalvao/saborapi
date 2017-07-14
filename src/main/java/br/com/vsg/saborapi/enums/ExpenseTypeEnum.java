@@ -1,5 +1,6 @@
 package br.com.vsg.saborapi.enums;
 
+
 public enum ExpenseTypeEnum {
 
 	WATTER( "WATTER" ),

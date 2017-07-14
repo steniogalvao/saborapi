@@ -18,6 +18,7 @@ public class DAOImpl implements DAO {
 	private EntityManager entityManager;
 
 	public void save( Object obj ) {
+		entityManager.flush();
 		entityManager.persist( obj );
 	}
 

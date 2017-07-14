@@ -1,20 +1,41 @@
 package br.com.vsg.saborapi.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+import br.com.vsg.saborapi.enums.FruitEnum;
 import br.com.vsg.saborapi.enums.SaleTypeEnum;
 
+@Entity
 public class Sale {
+	@Id
+	@GeneratedValue
+	private int id;
 
-	private String id = null;
-
-	private LocalDate date = null;
+	/**
+	 * {@link String}
+	 * */
+	private String date = null;
 
 	private int amount = 0;
 
-	private Fruit fruit = null;
+	@Enumerated( EnumType.STRING )
+	private FruitEnum fruit = null;
 
+	@OneToOne( cascade = CascadeType.PERSIST )
+	private Employee employee = null;
+
+	@OneToOne
+	private Price price;
+
+	@Enumerated( EnumType.STRING )
 	private SaleTypeEnum saleType = null;
 
 	private BigDecimal totalPrice = null;
@@ -23,19 +44,19 @@ public class Sale {
 
 	private BigDecimal fuelAmount = null;
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId( String id ) {
+	public void setId( int id ) {
 		this.id = id;
 	}
 
-	public LocalDate getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate( LocalDate date ) {
+	public void setDate( String date ) {
 		this.date = date;
 	}
 
@@ -47,12 +68,28 @@ public class Sale {
 		this.amount = amount;
 	}
 
-	public Fruit getFruit() {
+	public FruitEnum getFruit() {
 		return fruit;
 	}
 
-	public void setFruit( Fruit fruit ) {
+	public void setFruit( FruitEnum fruit ) {
 		this.fruit = fruit;
+	}
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee( Employee employee ) {
+		this.employee = employee;
+	}
+
+	public Price getPrice() {
+		return price;
+	}
+
+	public void setPrice( Price price ) {
+		this.price = price;
 	}
 
 	public SaleTypeEnum getSaleType() {
@@ -93,10 +130,12 @@ public class Sale {
 		int result = 1;
 		result = prime * result + amount;
 		result = prime * result + ( ( date == null ) ? 0 : date.hashCode() );
+		result = prime * result + ( ( employee == null ) ? 0 : employee.hashCode() );
 		result = prime * result + ( ( fruit == null ) ? 0 : fruit.hashCode() );
 		result = prime * result + ( ( fuelAmount == null ) ? 0 : fuelAmount.hashCode() );
-		result = prime * result + ( ( id == null ) ? 0 : id.hashCode() );
+		result = prime * result + id;
 		result = prime * result + ( ( kmTraveled == null ) ? 0 : kmTraveled.hashCode() );
+		result = prime * result + ( ( price == null ) ? 0 : price.hashCode() );
 		result = prime * result + ( ( saleType == null ) ? 0 : saleType.hashCode() );
 		result = prime * result + ( ( totalPrice == null ) ? 0 : totalPrice.hashCode() );
 		return result;
@@ -118,25 +157,29 @@ public class Sale {
 				return false;
 		} else if ( !date.equals( other.date ) )
 			return false;
-		if ( fruit == null ) {
-			if ( other.fruit != null )
+		if ( employee == null ) {
+			if ( other.employee != null )
 				return false;
-		} else if ( !fruit.equals( other.fruit ) )
+		} else if ( !employee.equals( other.employee ) )
+			return false;
+		if ( fruit != other.fruit )
 			return false;
 		if ( fuelAmount == null ) {
 			if ( other.fuelAmount != null )
 				return false;
 		} else if ( !fuelAmount.equals( other.fuelAmount ) )
 			return false;
-		if ( id == null ) {
-			if ( other.id != null )
-				return false;
-		} else if ( !id.equals( other.id ) )
+		if ( id != other.id )
 			return false;
 		if ( kmTraveled == null ) {
 			if ( other.kmTraveled != null )
 				return false;
 		} else if ( !kmTraveled.equals( other.kmTraveled ) )
+			return false;
+		if ( price == null ) {
+			if ( other.price != null )
+				return false;
+		} else if ( !price.equals( other.price ) )
 			return false;
 		if ( saleType != other.saleType )
 			return false;
@@ -150,7 +193,7 @@ public class Sale {
 
 	@Override
 	public String toString() {
-		return "Sale [id=" + id + ", date=" + date + ", amount=" + amount + ", fruit=" + fruit + ", saleType=" + saleType + ", totalPrice=" + totalPrice + ", kmTraveled=" + kmTraveled + ", fuelAmount=" + fuelAmount + "]";
+		return "Sale [id=" + id + ", date=" + date + ", amount=" + amount + ", fruit=" + fruit + ", employee=" + employee + ", price=" + price + ", saleType=" + saleType + ", totalPrice=" + totalPrice + ", kmTraveled=" + kmTraveled + ", fuelAmount=" + fuelAmount + "]";
 	}
 
 }

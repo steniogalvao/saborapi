@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.vsg.saborapi.dao.impl.DAOImpl;
 import br.com.vsg.saborapi.model.Despolp;
+import br.com.vsg.saborapi.model.Employee;
 import br.com.vsg.saborapi.services.DespolpService;
 import br.com.vsg.saborapi.utils.ConverterUtils;
 
@@ -32,6 +33,10 @@ public class DespolpServiceImpl implements DespolpService {
 
 	@Override
 	public JsonNode post( Despolp despolp ) {
+		if ( despolp.getEmployee() != null && despolp.getEmployee().getId() != 0 ) {
+			Employee employee = (Employee) dao.getById( Employee.class, despolp.getEmployee().getId() );
+			despolp.setEmployee( employee );
+		}
 		dao.save( despolp );
 		return null;
 	}

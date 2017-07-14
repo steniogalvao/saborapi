@@ -2,11 +2,19 @@ package br.com.vsg.saborapi.model;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import br.com.vsg.saborapi.enums.FruitEnum;
+
+@Entity
 public class Expense {
+	@Id
+	@GeneratedValue
+	private int id;
 
-	private String id = null;
-
-	private Fruit fruit = null;
+	private FruitEnum fruit = null;
 
 	private BigDecimal amount = null;
 
@@ -16,19 +24,21 @@ public class Expense {
 
 	private String description = null;
 
-	public String getId() {
+	private String date = null;
+
+	public int getId() {
 		return id;
 	}
 
-	public void setId( String id ) {
+	public void setId( int id ) {
 		this.id = id;
 	}
 
-	public Fruit getFruit() {
+	public FruitEnum getFruit() {
 		return fruit;
 	}
 
-	public void setFruit( Fruit fruit ) {
+	public void setFruit( FruitEnum fruit ) {
 		this.fruit = fruit;
 	}
 
@@ -64,14 +74,23 @@ public class Expense {
 		this.description = description;
 	}
 
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate( String date ) {
+		this.date = date;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ( ( amount == null ) ? 0 : amount.hashCode() );
+		result = prime * result + ( ( date == null ) ? 0 : date.hashCode() );
 		result = prime * result + ( ( description == null ) ? 0 : description.hashCode() );
 		result = prime * result + ( ( fruit == null ) ? 0 : fruit.hashCode() );
-		result = prime * result + ( ( id == null ) ? 0 : id.hashCode() );
+		result = prime * result + id;
 		result = prime * result + ( ( type == null ) ? 0 : type.hashCode() );
 		result = prime * result + ( ( value == null ) ? 0 : value.hashCode() );
 		return result;
@@ -91,6 +110,11 @@ public class Expense {
 				return false;
 		} else if ( !amount.equals( other.amount ) )
 			return false;
+		if ( date == null ) {
+			if ( other.date != null )
+				return false;
+		} else if ( !date.equals( other.date ) )
+			return false;
 		if ( description == null ) {
 			if ( other.description != null )
 				return false;
@@ -101,10 +125,7 @@ public class Expense {
 				return false;
 		} else if ( !fruit.equals( other.fruit ) )
 			return false;
-		if ( id == null ) {
-			if ( other.id != null )
-				return false;
-		} else if ( !id.equals( other.id ) )
+		if ( id != other.id )
 			return false;
 		if ( type == null ) {
 			if ( other.type != null )
@@ -121,7 +142,7 @@ public class Expense {
 
 	@Override
 	public String toString() {
-		return "Expense [id=" + id + ", fruit=" + fruit + ", amount=" + amount + ", value=" + value + ", type=" + type + ", description=" + description + "]";
+		return "Expense [id=" + id + ", fruit=" + fruit + ", amount=" + amount + ", value=" + value + ", type=" + type + ", description=" + description + ", date=" + date + "]";
 	}
 
 }

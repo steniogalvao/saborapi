@@ -2,33 +2,44 @@ package br.com.vsg.saborapi.model;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import br.com.vsg.saborapi.enums.FruitEnum;
 import br.com.vsg.saborapi.enums.ProductTypeEnum;
 
+@Entity
 public class Stock {
+	@Id
+	@GeneratedValue
+	private int id;
 
-	private String id = null;
-
-	private Fruit fruit = null;
+	@Enumerated( EnumType.STRING )
+	private FruitEnum fruit = null;
 
 	private String measure = null;
 
 	private BigDecimal amount = null;
 
+	@Enumerated( EnumType.STRING )
 	private ProductTypeEnum productType = null;
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId( String id ) {
+	public void setId( int id ) {
 		this.id = id;
 	}
 
-	public Fruit getFruit() {
+	public FruitEnum getFruit() {
 		return fruit;
 	}
 
-	public void setFruit( Fruit fruit ) {
+	public void setFruit( FruitEnum fruit ) {
 		this.fruit = fruit;
 	}
 
@@ -62,7 +73,7 @@ public class Stock {
 		int result = 1;
 		result = prime * result + ( ( amount == null ) ? 0 : amount.hashCode() );
 		result = prime * result + ( ( fruit == null ) ? 0 : fruit.hashCode() );
-		result = prime * result + ( ( id == null ) ? 0 : id.hashCode() );
+		result = prime * result + id;
 		result = prime * result + ( ( measure == null ) ? 0 : measure.hashCode() );
 		result = prime * result + ( ( productType == null ) ? 0 : productType.hashCode() );
 		return result;
@@ -87,10 +98,7 @@ public class Stock {
 				return false;
 		} else if ( !fruit.equals( other.fruit ) )
 			return false;
-		if ( id == null ) {
-			if ( other.id != null )
-				return false;
-		} else if ( !id.equals( other.id ) )
+		if ( id != other.id )
 			return false;
 		if ( measure == null ) {
 			if ( other.measure != null )
