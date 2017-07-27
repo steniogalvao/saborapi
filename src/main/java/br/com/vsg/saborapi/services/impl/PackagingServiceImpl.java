@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.vsg.saborapi.dao.impl.DAOImpl;
+import br.com.vsg.saborapi.model.Employee;
 import br.com.vsg.saborapi.model.Packaging;
 import br.com.vsg.saborapi.services.PackagingService;
 import br.com.vsg.saborapi.utils.ConverterUtils;
@@ -32,6 +33,10 @@ public class PackagingServiceImpl implements PackagingService {
 
 	@Override
 	public JsonNode post( Packaging packaging ) {
+		if ( packaging.getEmployee() != null && packaging.getEmployee().getId() != 0 ) {
+			Employee employee = (Employee) dao.getById( Employee.class, packaging.getEmployee().getId() );
+			packaging.setEmployee( employee );
+		}
 		dao.save( packaging );
 		return null;
 	}

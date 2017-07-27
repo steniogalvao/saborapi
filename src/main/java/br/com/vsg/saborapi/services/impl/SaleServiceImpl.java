@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.vsg.saborapi.dao.impl.DAOImpl;
+import br.com.vsg.saborapi.model.Employee;
+import br.com.vsg.saborapi.model.Price;
 import br.com.vsg.saborapi.model.Sale;
 import br.com.vsg.saborapi.services.SaleService;
 import br.com.vsg.saborapi.utils.ConverterUtils;
@@ -32,6 +34,14 @@ public class SaleServiceImpl implements SaleService {
 
 	@Override
 	public JsonNode post( Sale sale ) {
+		if ( sale.getEmployee() != null && sale.getEmployee().getId() != 0 ) {
+			Employee employee = (Employee) dao.getById( Employee.class, sale.getEmployee().getId() );
+			sale.setEmployee( employee );
+		}
+		if ( sale.getPrice() != null && sale.getPrice().getId() != 0 ) {
+			Price price = (Price) dao.getById( Price.class, sale.getPrice().getId() );
+			sale.setPrice( price );
+		}
 		dao.save( sale );
 		return null;
 	}
