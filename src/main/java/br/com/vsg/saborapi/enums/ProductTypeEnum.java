@@ -19,10 +19,10 @@ public enum ProductTypeEnum {
 		return this.name;
 	};
 
-	public static String getByName( String name ) {
+	public static ProductTypeEnum getByName( String name ) {
 		for ( ProductTypeEnum o : ProductTypeEnum.values() ) {
 			if ( o.name.equals( name ) )
-				return o.name;
+				return o;
 		}
 		return null;
 	}

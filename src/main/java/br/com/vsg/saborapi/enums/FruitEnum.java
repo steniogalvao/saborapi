@@ -24,10 +24,10 @@ public enum FruitEnum {
 		return this.name;
 	};
 
-	public static String getByName( String name ) {
+	public static FruitEnum getByName( String name ) {
 		for ( FruitEnum o : FruitEnum.values() ) {
 			if ( o.name.equals( name ) )
-				return o.name;
+				return o;
 		}
 		return null;
 	}

@@ -27,6 +27,11 @@ public class Stock {
 	@Enumerated( EnumType.STRING )
 	private ProductTypeEnum productType = null;
 
+	/**
+	 * {@link String}
+	 * */
+	private String date = null;
+
 	public int getId() {
 		return id;
 	}
@@ -67,11 +72,20 @@ public class Stock {
 		this.productType = productType;
 	}
 
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate( String date ) {
+		this.date = date;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ( ( amount == null ) ? 0 : amount.hashCode() );
+		result = prime * result + ( ( date == null ) ? 0 : date.hashCode() );
 		result = prime * result + ( ( fruit == null ) ? 0 : fruit.hashCode() );
 		result = prime * result + id;
 		result = prime * result + ( ( measure == null ) ? 0 : measure.hashCode() );
@@ -93,10 +107,12 @@ public class Stock {
 				return false;
 		} else if ( !amount.equals( other.amount ) )
 			return false;
-		if ( fruit == null ) {
-			if ( other.fruit != null )
+		if ( date == null ) {
+			if ( other.date != null )
 				return false;
-		} else if ( !fruit.equals( other.fruit ) )
+		} else if ( !date.equals( other.date ) )
+			return false;
+		if ( fruit != other.fruit )
 			return false;
 		if ( id != other.id )
 			return false;
@@ -112,7 +128,7 @@ public class Stock {
 
 	@Override
 	public String toString() {
-		return "Stock [id=" + id + ", fruit=" + fruit + ", measure=" + measure + ", amount=" + amount + ", productType=" + productType + "]";
+		return "Stock [id=" + id + ", fruit=" + fruit + ", measure=" + measure + ", amount=" + amount + ", productType=" + productType + ", date=" + date + "]";
 	}
 
 }

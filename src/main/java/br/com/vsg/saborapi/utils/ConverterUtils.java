@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import br.com.vsg.saborapi.enums.ErrorEnum;
+
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -76,6 +78,17 @@ public class ConverterUtils {
 		ObjectNode json = utils.instanceObjectNode();
 		json.put( "code", 1 );
 		ResponseEntity<String> response = new ResponseEntity<String>( json.toString(), HttpStatus.INTERNAL_SERVER_ERROR );
+		return response;
+	}
+
+	/**
+	 * Metodo para retornar um erro de acordo com o enum de erro
+	 * */
+	public ResponseEntity<String> returnErroApi( ErrorEnum errorEnum ) {
+		ObjectNode json = utils.instanceObjectNode();
+		json.put( "code", errorEnum.getCode() );
+		json.put( "msg", errorEnum.getMsg() );
+		ResponseEntity<String> response = new ResponseEntity<String>( json.toString(), errorEnum.getHttpStatus() );
 		return response;
 	}
 

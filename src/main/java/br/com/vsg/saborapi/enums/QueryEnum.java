@@ -7,7 +7,12 @@ public enum QueryEnum {
 	 * 
 	 * @param tableName
 	 */
-	SELECT_ALL_FROM( "FROM %s" );
+	SELECT_ALL_FROM( "FROM %s" ),
+	/**
+	 * Query to sum the amount of some product to check if is possible do some
+	 * withdraw
+	 * */
+	SUM_STOCK( "SELECT SUM(amount) FROM stock WHERE product_type ='%s' and fruit='%s'" );
 
 	private String query;
 
