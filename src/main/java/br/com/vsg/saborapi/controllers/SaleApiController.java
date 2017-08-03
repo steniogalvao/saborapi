@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.vsg.saborapi.api.SaleApi;
+import br.com.vsg.saborapi.enums.ErrorEnum;
+import br.com.vsg.saborapi.enums.ProductTypeEnum;
 import br.com.vsg.saborapi.model.Sale;
+import br.com.vsg.saborapi.model.Stock;
 import br.com.vsg.saborapi.services.SaleService;
+import br.com.vsg.saborapi.services.StockService;
 import br.com.vsg.saborapi.utils.ConverterUtils;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -24,12 +28,22 @@ public class SaleApiController implements SaleApi {
 	@Autowired
 	private SaleService service;
 	@Autowired
+	private StockService stockService;
+	@Autowired
 	private ConverterUtils converterUtils;
 
 	public ResponseEntity<String> salePOST( @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken, @ApiParam( value = "Dados da salea.", required = true ) @RequestBody Sale sale ) {
 		try {
+			Stock stock = new Stock();
+			stock.setProductType( ProductTypeEnum.PULP );
+			stock.setFruit( sale.getFruit() );
+			JsonNode stockJson = stockService.get( stock );
+			int stockAmount = stockJson.get( "amount" ).asInt();
+			if ( sale.getAmount() > stockAmount ) {
+				return converterUtils.returnErroApi( ErrorEnum.INSUFFICIENT_STOCK );
+			}
 			service.post( sale );
-			return new ResponseEntity<String>( HttpStatus.OK );
+			return new ResponseEntity<>( HttpStatus.OK );
 		} catch ( Exception e ) {
 			e.printStackTrace();
 			return converterUtils.returnErroApi();
@@ -38,8 +52,8 @@ public class SaleApiController implements SaleApi {
 
 	public ResponseEntity<String> saleUuidDELETE( @ApiParam( value = "Id da salea.", required = true ) @PathVariable( "id" ) int id, @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken ) {
 		try {
-			service.delete( Integer.valueOf( id ) );
-			return new ResponseEntity<String>( HttpStatus.OK );
+			service.delete( id );
+			return new ResponseEntity<>( HttpStatus.OK );
 		} catch ( Exception e ) {
 			e.printStackTrace();
 			return converterUtils.returnErroApi();
@@ -48,7 +62,7 @@ public class SaleApiController implements SaleApi {
 
 	public ResponseEntity<String> saleUuidGET( @ApiParam( value = "Id da salea.", required = true ) @PathVariable( "id" ) int id, @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken ) {
 		try {
-			JsonNode json = service.get( Integer.valueOf( id ) );
+			JsonNode json = service.get( id );
 			return converterUtils.returnJson( json );
 		} catch ( Exception e ) {
 			e.printStackTrace();
@@ -59,7 +73,7 @@ public class SaleApiController implements SaleApi {
 	public ResponseEntity<String> saleUuidPUT( @ApiParam( value = "Id da salea.", required = true ) @PathVariable( "id" ) int id, @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken, @ApiParam( value = "Dados do usuário.", required = true ) @RequestBody Sale sale ) {
 		try {
 			service.put( sale );
-			return new ResponseEntity<String>( HttpStatus.OK );
+			return new ResponseEntity<>( HttpStatus.OK );
 		} catch ( Exception e ) {
 			e.printStackTrace();
 			return converterUtils.returnErroApi();

@@ -62,7 +62,6 @@ public class StockServiceImpl implements StockService {
 			stock.setProductType( productType );
 			stockToSearch.add( stock );
 		}
-		System.out.println(stockToSearch.size());
 		for ( Stock stock : stockToSearch ) {
 			ObjectNode amountJson = (ObjectNode) get( stock );
 			stock.setAmount( BigDecimal.valueOf( amountJson.get( "amount" ).asDouble() ) );
