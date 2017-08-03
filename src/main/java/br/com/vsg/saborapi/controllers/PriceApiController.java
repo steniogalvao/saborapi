@@ -2,6 +2,7 @@ package br.com.vsg.saborapi.controllers;
 
 import io.swagger.annotations.ApiParam;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,43 +26,44 @@ public class PriceApiController implements PriceApi {
 	private PriceService service;
 	@Autowired
 	private ConverterUtils converterUtils;
+	private static final Logger LOGGER = Logger.getLogger( PriceApiController.class.getSimpleName() );
 
 	public ResponseEntity<String> pricePOST( @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken, @ApiParam( value = "Dados do preço.", required = true ) @RequestBody Price price ) {
 		try {
 			service.post( price );
-			return new ResponseEntity<String>( HttpStatus.OK );
+			return new ResponseEntity<>( HttpStatus.OK );
 		} catch ( Exception e ) {
-			e.printStackTrace();
+			LOGGER.error( e );
 			return converterUtils.returnErroApi();
 		}
 	}
 
-	public ResponseEntity<String> priceUuidDELETE( @ApiParam( value = "Id da pricea.", required = true ) @PathVariable( "id" ) int id, @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken ) {
+	public ResponseEntity<String> priceUuidDELETE( @ApiParam( value = "Id do preço.", required = true ) @PathVariable( "id" ) int id, @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken ) {
 		try {
-			service.delete( Integer.valueOf( id ) );
-			return new ResponseEntity<String>( HttpStatus.OK );
+			service.delete( id );
+			return new ResponseEntity<>( HttpStatus.OK );
 		} catch ( Exception e ) {
-			e.printStackTrace();
+			LOGGER.error( e );
 			return converterUtils.returnErroApi();
 		}
 	}
 
-	public ResponseEntity<String> priceUuidGET( @ApiParam( value = "Id da pricea.", required = true ) @PathVariable( "id" ) int id, @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken ) {
+	public ResponseEntity<String> priceUuidGET( @ApiParam( value = "Id do preço.", required = true ) @PathVariable( "id" ) int id, @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken ) {
 		try {
-			JsonNode json = service.get( Integer.valueOf( id ) );
+			JsonNode json = service.get( id );
 			return converterUtils.returnJson( json );
 		} catch ( Exception e ) {
-			e.printStackTrace();
+			LOGGER.error( e );
 			return converterUtils.returnErroApi();
 		}
 	}
 
-	public ResponseEntity<String> priceUuidPUT( @ApiParam( value = "Id da pricea.", required = true ) @PathVariable( "id" ) int id, @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken, @ApiParam( value = "Dados do usuário.", required = true ) @RequestBody Price price ) {
+	public ResponseEntity<String> priceUuidPUT( @ApiParam( value = "Id do preço.", required = true ) @PathVariable( "id" ) int id, @ApiParam( value = "Token de autenticação.", required = true ) @RequestParam( value = "accessToken", required = true ) String accessToken, @ApiParam( value = "Dados do usuário.", required = true ) @RequestBody Price price ) {
 		try {
 			service.put( price );
-			return new ResponseEntity<String>( HttpStatus.OK );
+			return new ResponseEntity<>( HttpStatus.OK );
 		} catch ( Exception e ) {
-			e.printStackTrace();
+			LOGGER.error( e );
 			return converterUtils.returnErroApi();
 		}
 	}

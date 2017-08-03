@@ -3,7 +3,7 @@ package br.com.vsg.saborapi.enums;
 
 public enum ExpenseTypeEnum {
 
-	WATTER( "WATTER" ),
+	WATER( "WATER" ),
 	LIGHT( "LIGHT" ),
 	SALARY( "SALARY" ),
 	INPUT( "INPUT" ),

@@ -8,6 +8,8 @@ public interface StockService {
 
 	JsonNode get( Stock stock );
 
+	JsonNode getAll();
+
 	JsonNode post( Stock stock );
 
 }

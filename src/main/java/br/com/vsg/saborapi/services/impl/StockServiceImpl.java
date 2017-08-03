@@ -1,11 +1,15 @@
 package br.com.vsg.saborapi.services.impl;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.vsg.saborapi.dao.impl.DAOImpl;
+import br.com.vsg.saborapi.enums.FruitEnum;
+import br.com.vsg.saborapi.enums.ProductTypeEnum;
 import br.com.vsg.saborapi.model.Stock;
 import br.com.vsg.saborapi.services.StockService;
 import br.com.vsg.saborapi.utils.ConverterUtils;
@@ -38,4 +42,31 @@ public class StockServiceImpl implements StockService {
 		return null;
 	}
 
+	public JsonNode getAll() {
+		List<ProductTypeEnum> productsWithFruit = new ArrayList<ProductTypeEnum>();
+		productsWithFruit.add( ProductTypeEnum.BAG_100 );
+		productsWithFruit.add( ProductTypeEnum.BAG_500 );
+		productsWithFruit.add( ProductTypeEnum.PULP );
+		productsWithFruit.add( ProductTypeEnum.FRUIT );
+		List<Stock> stockToSearch = new ArrayList<Stock>();
+		for ( ProductTypeEnum productType : ProductTypeEnum.values() ) {
+			if ( productsWithFruit.contains( productType ) ) {
+				for ( FruitEnum fruit : FruitEnum.values() ) {
+					Stock stock = new Stock();
+					stock.setFruit( fruit );
+					stock.setProductType( productType );
+					stockToSearch.add( stock );
+				}
+			}
+			Stock stock = new Stock();
+			stock.setProductType( productType );
+			stockToSearch.add( stock );
+		}
+		System.out.println(stockToSearch.size());
+		for ( Stock stock : stockToSearch ) {
+			ObjectNode amountJson = (ObjectNode) get( stock );
+			stock.setAmount( BigDecimal.valueOf( amountJson.get( "amount" ).asDouble() ) );
+		}
+		return converterUtils.ObjectToJson( stockToSearch );
+	}
 }
